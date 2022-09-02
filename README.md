@@ -126,7 +126,7 @@ redirect_to_auth = "yes"
 12- Configurar um usuário e grupo de teste.  
 12.1- Acesso o menu Services -> E2Guardian Proxy -> Guia Grups e clique em Add.  
 12.2- Dê um nome e uma descrição para o grupo (ex.: ti / ti).  
-12.3- Clique em Save ao final da página.
+12.3- Clique em Save ao final da página.  
 12.4- Acesse a aba Users.  
 12.5- No campo com o nome do grupo (ex.: ti) referente ao grupo ti, insira o login do usuário (ex.: luciano).  
 12.6- Clique em Save ao final da página.  
