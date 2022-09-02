@@ -102,7 +102,7 @@ redirect_to_auth = "yes"
 8.3- Edite o usuário criado acima e atribua a ele a permissão "User - Services: Captive Portal login".  
 
 9- Criar uma CA (Autoridade Certificadora) para usar na interceptação SSL/HTTPS do E2Guardian.   
-9.1- Acesse o menu System -> Cert. Manager, clique em Add.
+9.1- Acesse o menu System -> Cert. Manager, clique em Add.  
 9.2- Dê um nome descritivo para a CA (ex.: CA-E2GUARDIAN).  
 9.3- Marque a caixa "Trust Store".  
 9.4- Em "Common Name" preencha com um nome significativo (ex.: usar o mesmo da descrição).  
