@@ -1,10 +1,13 @@
-# e2guardian_patch_captiveportal
-Patch para permitir o Proxy E2Guardian identificar o usuário através da autenticação do Captive Portal no pfSense
+# E2Guardian - Integração de Autenticação com Captive Portal
+Patch para permitir o Proxy E2Guardian identificar o usuário logado através do Captive Portal no pfSense
+
+
+!! Importante: Este procedimento foi homologado para pfSense CE na versão 2.6  
+Última atualização: 01/09/2022  
+Responsável: Luciano Rodrigues - luciano@citrait.com.br
 
 ## Instalação:
 
-!! Importante: Este procedimento foi homologado para pfSense CE na versão 2.6  
-Última atualização: 01/09/2022
 
 ### Etapas:  
 1- Ajustar hostname e nome de domínio do firewall de acordo com o seu ambiente:  
@@ -78,10 +81,10 @@ plugname = 'dnsauth'
 basedomain = "citrait.local"
 
 # Authentication URL
-authurl = "https://192.168.1.3:8003/?redirurl"
+authurl = "https://192.168.1.1:8002/?redirurl"
 
 # Prefix for auth URLs
-prefix_auth = "https://192.168.1.3:8003/"
+prefix_auth = "https://192.168.1.1:8002/"
 
 # Redirect to auth (i.e. log-in)
 #  yes - redirects to authurl to login
