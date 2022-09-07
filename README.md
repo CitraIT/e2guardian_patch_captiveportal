@@ -9,14 +9,15 @@ Responsável: Luciano Rodrigues - luciano@citrait.com.br
 ## Instalação:
 
   
-### 1- Ajustar hostname e nome de domínio do firewall de acordo com o seu ambiente:  
-1.1- A configuração é feita pelo menu System -> General Setup.  
+### 1- Ajustar hostname e nome de domínio do firewall de acordo com o seu ambiente:
+1.1- A configuração é feita pelo menu System -> General Setup.
 
 ### 2- Criar o arquivo de configuração externa do serviço DNS:  
 2.1- Criar o arquivo /var/unbound/dnsauth.conf vazio com o comando abaixo (executar através do menu Diagnostics -> Command Prompt):  
 ```
 echo> /var/unbound/dnsauth.conf
-```
+```  
+  
 ### 3- Configure o serviço de DNS do pfSense para incluir o arquivo dnsauth.conf.  
 3.1- Acesse o menu Services -> DNS Resolver. Clique em Display Custom Options ao final da página e inclua a linha seguinte no campo de texto:  
 ```
