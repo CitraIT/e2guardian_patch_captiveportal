@@ -22,7 +22,8 @@ echo> /var/unbound/dnsauth.conf
 3.1- Acesse o menu Services -> DNS Resolver. Clique em Display Custom Options ao final da página e inclua a linha seguinte no campo de texto:  
 ```
 include: /var/unbound/dnsauth.conf
-```
+```  
+3.2- Importante: Você não deve habilitar o encaminhamento DNS (Query Forwarding), pois não irá funcionar com esta configuração.  
 ### 4- Realize a instalação do E2Guardian:  
 4.1- Vá no menu System -> Package Manager -> Available Packages e instale o pacote System_Patches.  
 4.2- Acesse a página abaixo e copie todo o código:  
