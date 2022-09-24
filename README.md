@@ -4,7 +4,7 @@ Patch para permitir o Proxy E2Guardian identificar o usuário logado através do
 
 !! Importante: Este procedimento foi homologado para pfSense CE na versão 2.6  
 Última atualização: 01/09/2022  
-Responsável: Luciano Rodrigues - luciano@citrait.com.br
+Responsável: Luciano Rodrigues - luciano@citrait.com.br  
 
 ## Instalação:
 
