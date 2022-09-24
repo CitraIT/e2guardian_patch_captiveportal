@@ -8,24 +8,28 @@
  $cpcfg = $config['captiveportal'][$cpzone];
 
  /* NOTE: IE 8/9 is buggy and that is why this is needed */
-@@ -266,6 +267,70 @@
-                 captiveportal_logportalauth($user, $clientmac, $clientip, $auth_result['login_status']);
-                 portal_allow($clientip, $clientmac, $user, $passwd, $redirurl, $auth_result['attributes'], $pipeno, $auth_result['auth_method'], $context);
-
-+                /* citra it modifications */
-+                //$target_user = "luciano"; # user builtin $user
+@@ -265,6 +266,89 @@
+        if ($auth_result['result']) {
+                captiveportal_logportalauth($user, $clientmac, $clientip, $auth_result['login_status']);
+                portal_allow($clientip, $clientmac, $user, $passwd, $redirurl, $auth_result['attributes'], $pipeno, $auth_result['auth_method'], $context);
 +
-+                /* READING LIST OF USER AND GROUP_ID ASSOCIATION */
++                // citrait modifications
++                // after the user successfully authenticate on captive portal, get it's e2guardian group association and
++                // register it on dns
++
++                //  reading the e2guardian list of user and group_id association
++                //  one entry per line in the followint format:
++                //  oscar=filter2
 +                $grouplist_content = file_get_contents("/usr/local/etc/e2guardian/lists/filtergroupslist");
 +                $lines = explode("\n", $grouplist_content);
 +                $user_group_id = 0;
 +
-+                // searching for user record in filtergrouplist
++                // lookup the authenticated user record in filtergrouplist
 +                for($i=0; $i<=count($lines); $i++) {
 +                    if(!empty($lines[$i])) {
 +                        $user_group_array = explode("=", $lines[$i]);
 +                        if($user_group_array[0] == $user) {
-+                            // we found target user
++                            // found target user. extract the group id from this entry
 +                            $user_group_id = str_replace("filter", "",  $user_group_array[1]);
 +                        }
 +                    }
@@ -33,7 +37,7 @@
 +
 +
 +
-+                // TODO read basedomain var from e2guardian dnsauth pluginauth config
++                // read default base domain from dns authplugin config file
 +                $dnsauthplugin_content = file_get_contents("/usr/local/etc/e2guardian/authplugins/dnsauth.conf");
 +                $dnsauthplugin_lines = explode("\n", $dnsauthplugin_content);
 +                $dnsauthplugin_lines_count = count($dnsauthplugin_lines);
@@ -48,39 +52,49 @@
 +
 +                // convert user ip to dnsauth txt format
 +                $dnsip = str_replace(".", "-", $clientip);
-+                //$user_txt_dns_record = "local-data: '$dnsip.$basedomain TXT \"$user,$user_group_id\"'\n";
 +                $user_txt_dns_record = "local-data: '$dnsip.$basedomain TXT \"$user,$user_group_id\"'";
 +
-+                // search if user already registered on dns
++                // read the file containing the authenticated entries
 +                $dnsauth_content = file_get_contents("/var/unbound/dnsauth.conf");
 +                $dnsauth_lines = explode("\n", $dnsauth_content);
 +                $dnsauth_lines_count = count($dnsauth_lines);
-+                $user_record_found = false;
-+                for($i=0; $i<=$dnsauth_lines_count; $i++) {
-+                        //echo "searching on line " . $dnsauth_lines[$i] . "\n";
-+                        if($dnsauth_lines[$i] == $user_txt_dns_record){
-+                                $user_record_found = true;
-+                        }
++
++                // search if the ip address already present in database
++                $target_ip_found = false;
++                $target_ip_found_index = 0;
++                for($i=0; $i<=$dnsauth_lines_count; $i++){
++                    if(strpos($dnsauth_lines[$i], $dnsip) !== false){
++                        $target_ip_found = true;
++                        $target_ip_found_index = $i;
++                        break;
++
++                    }
++                }
++
++                // if we found the target ip, then remove existing entry for this ip in the array containing the config lines
++                if($target_ip_found){
++                    unset($dnsauth_lines[$target_ip_found_index]);
++                    $dnsauth_lines = array_values($dnsauth_lines);
++
 +                }
 +
 +
-+                // open dnsauth file and write the record
-+                // what if user authenticated with another IP previously?
-+                if(!$user_record_found) {
-+                        $dnsauthfile = fopen("/var/unbound/dnsauth.conf", "a");
-+                        fwrite($dnsauthfile, $user_txt_dns_record . "\n");
-+                        fclose($dnsauthfile);
-+
-+                        // signalling unbound to reload with SIGHUP
-+                        $unbound_pid = @system("ps -xa | grep unbound | grep -v grep | awk '{print $1}'");
-+                        @system("kill -s HUP " . $unbound_pid);
++                // save dnsauth.conf entri(es)
++                if($target_ip_found){
++                    array_push($dnsauth_lines, $user_txt_dns_record );
++                    $dnsauthfile = fopen("/var/unbound/dnsauth.conf", "w");
++                    fwrite($dnsauthfile, implode("\n", $dnsauth_lines) );
++                    fclose($dnsauthfile);
++                }else{
++                    $dnsauthfile = fopen("/var/unbound/dnsauth.conf", "a");
++                    fwrite($dnsauthfile, "\n" . $user_txt_dns_record);
++                    fclose($dnsauthfile);
 +                }
 +
-         } else {
-                 captiveportal_free_dn_ruleno($pipeno);
-                 $type = "error";
-@@ -298,3 +363,4 @@
- ob_flush();
++
++                // signalling unbound to reload with SIGHUP
++                $unbound_pid = @system("ps -xa | grep unbound | grep -v grep | awk '{print $1}'");
++                @system("kill -s HUP " . $unbound_pid);
 
- ?>
-+
+        } else {
+                captiveportal_free_dn_ruleno($pipeno);
