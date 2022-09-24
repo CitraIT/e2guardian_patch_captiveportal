@@ -1,0 +1,35 @@
+--- /etc/inc/captiveportal.inc.orig      2022-09-24 16:59:06.244325000 -0300
++++ /etc/inc/captiveportal.inc   2022-09-24 18:26:30.359653000 -0300
+@@ -34,6 +34,7 @@
+ require_once("filter.inc");
+ require_once("voucher.inc");
+ require_once("xmlrpc_client.inc");
++require_once("captive2guardian.inc");
+
+ /* Captiveportal Radius Accounting */
+ PEAR::loadExtension('bcmath');
+@@ -1258,6 +1259,7 @@
+        if (!empty($result)) {
+
+                foreach ($result as $cpentry) {
++                       captive2guardian_remove_entry_by_ip($cpentry["ip"]);
+                        captiveportal_disconnect($cpentry, $term_cause);
+                        captiveportal_logportalauth($cpentry[4], $cpentry[3], $cpentry[2], "DISCONNECT");
+                }
+@@ -1315,6 +1317,7 @@
+
+        unlock($cpdblck);
+        unlock($rcprunelock);
++       captive2guardian_remove_all_entries();
+        return true;
+ }
+
+@@ -2716,6 +2719,8 @@
+        } else {
+                portal_reply_page($my_redirurl, "redir", "Just redirect the user.");
+        }
++
++       captive2guardian_add_entry($clientip, $username);
+
+        return $sessionid;
+ }
