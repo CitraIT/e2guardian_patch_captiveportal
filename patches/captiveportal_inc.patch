@@ -8,19 +8,19 @@
 
  /* Captiveportal Radius Accounting */
  PEAR::loadExtension('bcmath');
-@@ -1258,6 +1259,7 @@
-        if (!empty($result)) {
-
-                foreach ($result as $cpentry) {
-+                       captive2guardian_remove_entry_by_ip($cpentry["ip"]);
-                        captiveportal_disconnect($cpentry, $term_cause);
-                        captiveportal_logportalauth($cpentry[4], $cpentry[3], $cpentry[2], "DISCONNECT");
-                }
+@@ -1182,6 +1183,7 @@
+                 * Delete client's ip entry from tables auth_up and auth_down.
+                 * It's not necessary to explicit specify mac address here
+                 */
++         captive2guardian_remove_entry_by_ip($dbent[2]);
+                $cpsession = captiveportal_isip_logged($dbent[2]);
+                if (!empty($cpsession)) {
+                        $clientsn = (is_ipaddrv6($dbent[2])) ? 128 : 32;
 @@ -1315,6 +1317,7 @@
 
         unlock($cpdblck);
         unlock($rcprunelock);
-+       captive2guardian_remove_all_entries();
++    captive2guardian_remove_all_entries();
         return true;
  }
 
@@ -29,7 +29,7 @@
                 portal_reply_page($my_redirurl, "redir", "Just redirect the user.");
         }
 +
-+       captive2guardian_add_entry($clientip, $username);
++    captive2guardian_add_entry($clientip, $username);
 
         return $sessionid;
  }
