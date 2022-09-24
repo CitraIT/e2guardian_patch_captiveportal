@@ -62,7 +62,8 @@ https://raw.githubusercontent.com/CitraIT/e2guardian_patch_captiveportal/main/pa
 6.3- Cole o código no campo Patch Contents.  
 6.4- Em Description preencha com: CitraIT_Patch_CaptivePortal_Index_PHP.  
 6.5- No campo Path Strip Count defina com valor 1 e salve o patch (botão save ao final da página).  
-6.6- Clique em apply no patch recem registrado.  
+6.6- Clique em Save ao final da página.  
+6.7- Clique em apply no patch recem registrado.  
 
 ### 7- Ajustar o plugin de autenticação do E2Guardian.  
 7.1- Acesse o menu Diagnostics -> Edit File.  
