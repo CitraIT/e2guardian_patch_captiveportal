@@ -8,7 +8,7 @@ Responsável: Luciano Rodrigues - luciano@citrait.com.br
 
 ## Instalação:
 
-!! TODO - ALTERAR README PARA REFLETIR ULTIMA ATUALIZAÇÃO DO CÓDIGO  
+
 
 ### 1- Ajustar hostname e nome de domínio do firewall de acordo com o seu ambiente:
 1.1- A configuração é feita pelo menu System -> General Setup.
