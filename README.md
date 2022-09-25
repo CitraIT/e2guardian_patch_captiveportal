@@ -25,6 +25,8 @@ echo> /var/unbound/dnsauth.conf
 include: /var/unbound/dnsauth.conf
 ```  
 3.2- Importante: Você não deve habilitar o encaminhamento DNS (Query Forwarding), pois não irá funcionar com esta configuração.  
+
+
 ### 4- Realize a instalação do E2Guardian:  
 4.1- Vá no menu System -> Package Manager -> Available Packages e instale o pacote System_Patches.  
 4.2- Acesse a página abaixo e copie todo o código:  
@@ -135,13 +137,34 @@ redirect_to_auth = "yes"
 12.6- Clique em Save ao final da página.  
 12.7- Clique em Apply Changes (botão verde que aparece no topo após salvar a configuração).  
 
-### 13- Testar  
-13.1- Usando uma máquina que está dentro da zona do captive portal habilitado (LAN), navegue em algum site.  
-13.2- Você deve ser redirecionado para a tela do captive portal.  
-13.3- Após autenticar, deverá ser redirecionado para o site que tentou navegar.  
-13.4- Acesse o menu Services -> E2Guardian Proxy.  
-13.5- Clique na guia Real Time.  
-13.6- Deverá aparecer nos logs o nome do usuário e o grupo que ele foi identificado semelhante a imagem abaixo:  
+
+### 13- Baixar a biblioteca de rotinas da integração.  
+13.1- No menu Diagnostics -> Command Prompt execute o comando abaixo:  
+```
+fetch -q -o /etc/inc/captive2guardian.inc https://raw.githubusercontent.com/CitraIT/e2guardian_patch_captiveportal/main/etc/inc/captive2guardian.inc
+```  
+
+
+### 14- Aplicar o patch da biblioteca do captive portal:  
+14.1- Acesse a página abaixo e copie todo o código:  
+```
+https://raw.githubusercontent.com/CitraIT/e2guardian_patch_captiveportal/main/patches/captiveportal_inc.patch
+```  
+14.2- Acesse o menu System -> Patches. Clique em Add New Patch.  
+14.3- Cole o código no campo Patch Contents.  
+14.4- Em Description preencha com: citrait_captive2guardian_inc.  
+14.5- No campo Path Strip Count defina com valor 1 e salve o patch (botão save ao final da página).  
+14.6- Clique em apply no patch recem registrado.  
+
+
+
+### 15- Testar  
+15.1- Usando uma máquina que está dentro da zona do captive portal habilitado (LAN), navegue em algum site.  
+15.2- Você deve ser redirecionado para a tela do captive portal.  
+15.3- Após autenticar, deverá ser redirecionado para o site que tentou navegar.  
+15.4- Acesse o menu Services -> E2Guardian Proxy.  
+15.5- Clique na guia Real Time.  
+15.6- Deverá aparecer nos logs o nome do usuário e o grupo que ele foi identificado semelhante a imagem abaixo:  
 
 ![image](https://user-images.githubusercontent.com/91758384/188039740-0e3cbd25-b9ae-4c37-8636-5a2e051f5ad5.png)
 
