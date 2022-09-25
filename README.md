@@ -113,48 +113,50 @@ redirect_to_auth = "yes"
 9.4- Em "Common Name" preencha com um nome significativo (ex.: usar o mesmo da descrição).  
 9.5- Preencha as informações organizacionais (country code, state, city...) e clique em Save.
 
-### 10- Configurar o E2Guardian.  
-10.1- Acesse o menu Services -> E2Guardian Proxy.  
-10.2- Marque a caixa "Enable e2guardian".  
-10.3- Selecione as interfaces LAN e Loopback.  
-10.4- Marque a caixa "Transparent HTTP Proxy".  
-10.5- Marque a opção "Bypass Proxy for Private Address Destination".  
-10.6- Marque a opção "Enable SSL support".  
-10.7- Selecione a CA que criou na etapa acima.  
-10.8- Clique em Save.  
 
-### 11- Habilitar a autenticação no E2Guardian.  
-11.1- Acesso o menu Services -> E2Guardian Proxy -> Guia General.  
-11.2- No campo "Auth Plugins" selecione apenas DNS.  
-11.3- Clique em Save ao final da Página.  
-
-### 12- Configurar um usuário e grupo de teste.  
-12.1- Acesso o menu Services -> E2Guardian Proxy -> Guia Grups e clique em Add.  
-12.2- Dê um nome e uma descrição para o grupo (ex.: ti / ti).  
-12.3- Clique em Save ao final da página.  
-12.4- Acesse a aba Users.  
-12.5- No campo com o nome do grupo (ex.: ti) referente ao grupo ti, insira o login do usuário (ex.: luciano).  
-12.6- Clique em Save ao final da página.  
-12.7- Clique em Apply Changes (botão verde que aparece no topo após salvar a configuração).  
-
-
-### 13- Baixar a biblioteca de rotinas da integração.  
-13.1- No menu Diagnostics -> Command Prompt execute o comando abaixo:  
+### 10- Baixar a biblioteca de rotinas da integração.  
+10.1- No menu Diagnostics -> Command Prompt execute o comando abaixo:  
 ```
 fetch -q -o /etc/inc/captive2guardian.inc https://raw.githubusercontent.com/CitraIT/e2guardian_patch_captiveportal/main/etc/inc/captive2guardian.inc
 ```  
 
 
-### 14- Aplicar o patch da biblioteca do captive portal:  
-14.1- Acesse a página abaixo e copie todo o código:  
+### 11- Aplicar o patch da biblioteca do captive portal:  
+11.1- Acesse a página abaixo e copie todo o código:  
 ```
 https://raw.githubusercontent.com/CitraIT/e2guardian_patch_captiveportal/main/patches/captiveportal_inc.patch
 ```  
-14.2- Acesse o menu System -> Patches. Clique em Add New Patch.  
-14.3- Cole o código no campo Patch Contents.  
-14.4- Em Description preencha com: citrait_captive2guardian_inc.  
-14.5- No campo Path Strip Count defina com valor 1 e salve o patch (botão save ao final da página).  
-14.6- Clique em apply no patch recem registrado.  
+11.2- Acesse o menu System -> Patches. Clique em Add New Patch.  
+11.3- Cole o código no campo Patch Contents.  
+11.4- Em Description preencha com: citrait_captive2guardian_inc.  
+11.5- No campo Path Strip Count defina com valor 1 e salve o patch (botão save ao final da página).  
+11.6- Clique em apply no patch recem registrado.  
+
+
+
+### 12- Configurar o E2Guardian.  
+12.1- Acesse o menu Services -> E2Guardian Proxy.  
+12.2- Marque a caixa "Enable e2guardian".  
+12.3- Selecione as interfaces LAN e Loopback.  
+12.4- Marque a caixa "Transparent HTTP Proxy".  
+12.5- Marque a opção "Bypass Proxy for Private Address Destination".  
+12.6- Marque a opção "Enable SSL support".  
+12.7- Selecione a CA que criou na etapa acima.  
+12.8- Clique em Save.  
+
+### 13- Habilitar a autenticação no E2Guardian.  
+13.1- Acesso o menu Services -> E2Guardian Proxy -> Guia General.  
+13.2- No campo "Auth Plugins" selecione apenas DNS.  
+13.3- Clique em Save ao final da Página.  
+
+### 14- Configurar um usuário e grupo de teste.  
+14.1- Acesso o menu Services -> E2Guardian Proxy -> Guia Grups e clique em Add.  
+14.2- Dê um nome e uma descrição para o grupo (ex.: ti / ti).  
+14.3- Clique em Save ao final da página.  
+14.4- Acesse a aba Users.  
+14.5- No campo com o nome do grupo (ex.: ti) referente ao grupo ti, insira o login do usuário (ex.: luciano).  
+14.6- Clique em Save ao final da página.  
+14.7- Clique em Apply Changes (botão verde que aparece no topo após salvar a configuração).  
 
 
 
