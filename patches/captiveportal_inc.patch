@@ -1,5 +1,5 @@
---- /etc/inc/captiveportal.inc.orig      2022-09-24 16:59:06.244325000 -0300
-+++ /etc/inc/captiveportal.inc   2022-09-24 18:26:30.359653000 -0300
+--- captiveportal.inc.orig      2024-03-18 09:36:49.540049000 -0300
++++ captiveportal.inc   2024-03-18 09:39:46.267379000 -0300
 @@ -34,6 +34,7 @@
  require_once("filter.inc");
  require_once("voucher.inc");
@@ -8,28 +8,28 @@
 
  /* Captiveportal Radius Accounting */
  PEAR::loadExtension('bcmath');
-@@ -1182,6 +1183,7 @@
-                 * Delete client's ip entry from tables auth_up and auth_down.
-                 * It's not necessary to explicit specify mac address here
+@@ -874,6 +875,7 @@
+                /*
+                 * Delete client's anchor entry from auth anchor
                  */
-+         captive2guardian_remove_entry_by_ip($dbent[2]);
++               captive2guardian_remove_entry_by_ip($dbent[2]);
                 $cpsession = captiveportal_isip_logged($dbent[2]);
                 if (!empty($cpsession)) {
-                        $clientsn = (is_ipaddrv6($dbent[2])) ? 128 : 32;
-@@ -1315,6 +1317,7 @@
+                        $host = array();
+@@ -978,6 +980,7 @@
 
         unlock($cpdblck);
         unlock($rcprunelock);
-+    captive2guardian_remove_all_entries();
++       captive2guardian_remove_all_entries();
         return true;
  }
 
-@@ -2716,6 +2719,8 @@
+@@ -2226,7 +2229,7 @@
         } else {
                 portal_reply_page($my_redirurl, "redir", "Just redirect the user.");
         }
-+
-+    captive2guardian_add_entry($clientip, $username);
-
+-
++       captive2guardian_add_entry($clientip, $username);
         return $sessionid;
  }
+
