@@ -2,8 +2,9 @@
 Patch para permitir o Proxy E2Guardian identificar o usuário logado através do Captive Portal no pfSense
 
 
-!! Importante: Este procedimento foi homologado para pfSense CE na versão 2.6  
-Última atualização: 25/09/2022   
+!! Importante: Este procedimento foi homologado para pfSense CE na versão 2.7.2  
+Última atualização: 18/03/2024   
+Versão: 1.3 - atualização do procedimento para pfSense 2.7.2  
 Versão: 1.2 - correções para detectar logout dos usuários e limpar cache junto ao captive portal  
 Versão: 1.1 - publicação inicial  
 Responsável: Luciano Rodrigues - luciano@citrait.com.br  
