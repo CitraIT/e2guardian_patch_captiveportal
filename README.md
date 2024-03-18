@@ -49,7 +49,12 @@ https://raw.githubusercontent.com/marcelloc/Unofficial-pfSense-packages/master/U
 ```
 pkg update
 ```
-4.10- Acesse o menu System -> Package Manager -> Available Packages e instale o pacote E2Guardian.
+4.10- Acesse o menu System -> Package Manager -> Available Packages e instale o pacote E2Guardian.  
+4.11- Execute os comandos abaixo para resolver os problemas de DLL faltando no E2Guardian:  
+```
+ln -s /usr/lib/libssl.so.30 /lib/libssl.so.111
+ln -s /lib/libcrypto.so.30 /lib/libcrypto.so.111
+```  
 
 ### 5- Realize a configuração do captive portal (adicione uma zona ao captive portal).  
 5.1- Acesse Zones -> Captive Portal e clique em Add.  
