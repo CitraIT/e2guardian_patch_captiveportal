@@ -1,5 +1,5 @@
---- captiveportal.inc.orig      2024-03-18 09:36:49.540049000 -0300
-+++ captiveportal.inc   2024-03-18 09:39:46.267379000 -0300
+--- /etc/inc/captiveportal.inc.orig      2024-03-18 09:36:49.540049000 -0300
++++ /etc/inc/captiveportal.inc   2024-03-18 09:39:46.267379000 -0300
 @@ -34,6 +34,7 @@
  require_once("filter.inc");
  require_once("voucher.inc");
