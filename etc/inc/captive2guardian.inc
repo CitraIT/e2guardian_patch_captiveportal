@@ -156,11 +156,12 @@ function captive2guardian_remove_all_entries(){
 
 
 /*
- * Reloads unbound daemon with signal HUP (sighup)
+ * Reloads unbound daemon with unbound-control
 */
 
 function captive2guardian_reload_unbound(){
     // signalling unbound to reload with SIGHUP
-    $unbound_pid = @system("ps -xa | grep unbound | grep -v grep | awk '{print $1}'");
-    @system("kill -s HUP " . $unbound_pid);
+    //$unbound_pid = @system("ps -xa | grep unbound | grep -v grep | awk '{print $1}'");
+    //@system("kill -s HUP " . $unbound_pid);
+    @system("unbound-control -c /var/unbound/unbound.conf reload");
 }
