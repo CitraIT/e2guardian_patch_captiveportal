@@ -34,7 +34,7 @@ include: /var/unbound/dnsauth.conf
 4.1- Vá no menu System -> Package Manager -> Available Packages e instale o pacote System_Patches.  
 4.2- Acesse a página abaixo e copie todo o código:  
 ```
-https://raw.githubusercontent.com/marcelloc/Unofficial-pfSense-packages/master/25_unofficial_packages_list.patch
+https://raw.githubusercontent.com/marcelloc/Unofficial-pfSense-packages/master/27_unofficial_packages_list.patch
 ```  
 4.3- Acesse o menu System -> Patches. Clique em Add New Patch.  
 4.4- Cole o código no campo Patch Contents.  
