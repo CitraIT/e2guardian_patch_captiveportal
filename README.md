@@ -3,10 +3,11 @@ Patch para permitir o Proxy E2Guardian identificar o usuário logado através do
 
 
 !! Importante: Este procedimento foi homologado para pfSense CE na versão 2.7.2  
-Última atualização: 18/03/2024   
-Versão: 1.3 - atualização do procedimento para pfSense 2.7.2  
-Versão: 1.2 - correções para detectar logout dos usuários e limpar cache junto ao captive portal  
-Versão: 1.1 - publicação inicial  
+Última atualização: 01/05/2024   
+Versão: 1.3 - atualização URL do repositório extra oficial de plugins e adicionado seção de troubleshooting ao final deste documento.  
+Versão: 1.3 - atualização do procedimento para pfSense 2.7.2.  
+Versão: 1.2 - correções para detectar logout dos usuários e limpar cache junto ao captive portal.  
+Versão: 1.1 - publicação inicial.  
 Responsável: Luciano Rodrigues - luciano@citrait.com.br  
 
 ## Instalação:
@@ -178,6 +179,14 @@ https://raw.githubusercontent.com/CitraIT/e2guardian_patch_captiveportal/main/pa
 
 ![image](https://user-images.githubusercontent.com/91758384/188039740-0e3cbd25-b9ae-4c37-8636-5a2e051f5ad5.png)
 
+
+### 16- Resolução de Problemas  
+16.1- Muito provavelmente você vai querer criar uma regra bloqueando o acesso direto da LAN a sites externos (tcp/udp) nas portas 80/443.  
+16.2- Garanta que o firewall usa apenas ele mesmo como DNS (não deixar fazer sobrescrita de dns pela operadora).  
+16.3- Navegadores hoje em dia usam o protocolo QUIC/udp por padrão, que é incompatível com o proxy transparente. Por algumas vezes as páginas irão dar erro e depois irão carregar. É uma limitação recente dos proxies.  
+16.4- O E2Guardian já vem com a lista de categorias de sites Shallalist (em sua última atualização).  
+16.5- Altere a porta da webgui do firewall e desabilite o redirect da webgui para evitar problemas.  
+16.6- Use o captive portal com SSL habilitado e certificado válido (ainda que emitido pelo plugin acme/let's encrypt). Se não usar o ssl, edite o arquivo de autenticação do E2Guardian para refletir a url do captive portal sem HTTPS.    
 
 
 
